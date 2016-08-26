@@ -1,3 +1,8 @@
+:::::::::::::::::::::::::::::::::::::::::::::
+::   Please put this script file at your   ::
+:: Minecraft Server root with "mcrcon.exe" ::
+:::::::::::::::::::::::::::::::::::::::::::::
+
 :: Mute most of the script output
 @echo off
 
@@ -36,8 +41,9 @@ set /a autobackupinterval=6
 
 :: Check for mcrcon.exe if exist
 @if not exist mcrcon.exe (
-  @echo ERROR: Cannot find "mcrcon.exe". Bailing out!
-  @echo.
+  @echo ERROR: Cannot find "mcrcon.exe"!
+  @echo Please goto: https://sourceforge.net/projects/mcrcon/files/
+  @echo To download the lastest "mcrcon.exe" and put it at the same folder as this .bat file.
   @pause
   @exit
 )
