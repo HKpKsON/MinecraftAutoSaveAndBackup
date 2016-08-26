@@ -19,7 +19,7 @@ set passwd=stonedfroginthepond
 
 :: Server Map Name
 set worldname="awholenewworld"
-:: Backup Location
+:: Backup Location (DO NOT PUT / AT THE END!!)
 set backupdir="world_backups"
 
 :: Auto-save interval (In seconds)
