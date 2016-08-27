@@ -6,6 +6,9 @@
 :: Mute most of the script output
 @echo off
 
+@echo MINECRAFT SERVER AUTO-SAVING AND AUTO-BACKUP SCRIPT BY: HKPKSON @GAMINGKEN.COM
+@echo OPEN-SOURCED AND NON-PROFIT USE. COPYRIGHTED 2017
+
 ::::::::::::::::::::::
 :: Script Variables ::
 ::::::::::::::::::::::
@@ -25,7 +28,7 @@ set backupdir="world_backups"
 :: Auto-save interval (In seconds)
 set /a autosaveinterval=600
 :: Auto-backup interval (In rounds of autosaves)
-set /a autobackupinterval=6
+set /a autobackupinterval=12
 
 
 ::::::::::::::::::::::
@@ -52,15 +55,16 @@ set /a autobackupinterval=6
 set /a i=0
 
 :: Wait 5sec before start
-timeout /t 5
+timeout /t 10
 
 :: Auto-save script
 :autosave
 @echo AUTO-SAVING IN-PROGRESS...
 mcrcon.exe -c -H %host% -P %port% -p %passwd% save-all
-@echo AUTO-SAVING COMPLETE...
+@echo AUTO-SAVING COMPLETED...
 
 :: Auto-backup when counter is 0, then go countinue script
+@echo %i% ROUNDS BEFORE AUTO-BACKUP.
 if %i% == 0 goto :backup
 :endbackup
 
@@ -90,7 +94,7 @@ if "%day:~0,1%" == " " set day=0%day:~1,1%
 set datetimef=%year%%month%%day%_%hour%%min%%secs%
 xcopy %worldname% "%backupdir%/%datetimef%" /s /I
 mcrcon.exe -c -H %host% -P %port% -p %passwd% save-on
-@echo AUTO-BACKUP COMPLETE...
+@echo AUTO-BACKUP COMPLETED...
 set /a i=%autobackupinterval%
 @goto :endbackup
 
