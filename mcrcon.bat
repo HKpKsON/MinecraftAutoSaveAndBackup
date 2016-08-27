@@ -79,6 +79,7 @@ goto :autosave
 :: Author: http://www.minecraftforum.net/forums/support/server-support/server-administration/2206731-tool-auto-world-backup-using-rcon-on-windows-for
 :backup
 @echo AUTO-BACKUP IN-PROGRESS...
+mcrcon.exe -c -H %host% -P %port% -p %passwd% "/tellraw @a [\"\",{\"text\":\"[Rcon: World backup in progress]\",\"color\":\"gray\",\"italic\":true}]"
 mcrcon.exe -c -H %host% -P %port% -p %passwd% save-off
 set hour=%time:~0,2%
 if "%hour:~0,1%" == " " set hour=0%hour:~1,1%
@@ -93,7 +94,9 @@ set day=%date:~0,2%
 if "%day:~0,1%" == " " set day=0%day:~1,1%
 set datetimef=%year%%month%%day%_%hour%%min%%secs%
 xcopy %worldname% "%backupdir%/%datetimef%" /s /I
+set /a nextbak=%autosaveinterval%*%autobackupinterval%/60
 mcrcon.exe -c -H %host% -P %port% -p %passwd% save-on
+mcrcon.exe -c -H %host% -P %port% -p %passwd% "/tellraw @a [\"\",{\"text\":\"[Rcon: World backup success, next backup in %nextbak% minutes]\",\"color\":\"gray\",\"italic\":true}]"
 @echo AUTO-BACKUP COMPLETED...
 set /a i=%autobackupinterval%
 @goto :endbackup
