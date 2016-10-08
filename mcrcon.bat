@@ -18,7 +18,7 @@ set host=127.0.0.1
 :: Server RCON port
 set port=25590
 :: Server RCON password
-set passwd=stonedfroginthepond
+set passwd=password
 
 :: Server Map Name
 set worldname="awholenewworld"
